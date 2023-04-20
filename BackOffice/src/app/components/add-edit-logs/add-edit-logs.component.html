@@ -1,0 +1,34 @@
+<app-progress-bar *ngIf="loading"></app-progress-bar>
+<div *ngIf="!loading" class="row mt-1">
+    <div class="col-lg-4 offset-lg-4">
+        <div class="card bg-secondary mb-3" style="max-width: 25rem;">
+            <div class="card-header text-center">{{operacion}} log</div>
+            <div class="card-body">
+                <form [formGroup]="formLogs" (ngSubmit)="addLog()">
+                    <input formControlName="user" type="text" class="form-control" placeholder="Ingrese user">
+                    <span *ngIf="formLogs.get('user')?.hasError('required') && formLogs.get('user')?.touched">
+                        El campo user es <strong>requerido</strong>
+                    </span>
+                    <input formControlName="fechaLog" type="text" class="form-control mt-2" placeholder="Ingrese fecha del Log">
+                    <span *ngIf="formLogs.get('fechaLog')?.hasError('required') && formLogs.get('fechaLog')?.touched">
+                        El campo fechaLog es <strong>requerido</strong>
+                    </span>
+                    <input formControlName="tipoLog" type="text" class="form-control mt-2" placeholder="Ingrese tipo de Log">
+                    <span *ngIf="formLogs.get('tipoLog')?.hasError('required') && formLogs.get('tipoLog')?.touched">
+                        El campo tipoLog es <strong>requerido</strong>
+                    </span>
+                
+                    <div class="row mt-2 text-center">
+                        <div class="col-lg-6">
+                            <button (click)="goBack()" type="button" class="btn btn-secondary">Volver</button>
+                        </div>
+                        <div class="col-lg-6">
+                            <button [disabled]="formLogs.invalid" type="submit" class="btn btn-primary">{{operacion}}</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
